@@ -46,7 +46,7 @@ The Cinema Management System is a C++ application designed to manage cinema oper
 3. Compile the project using a C++ compiler:
 
     ```bash
-    g++ -o cinema_management_system App.cpp Seats.cpp UserC.cpp Ticket.cpp Payment.cpp ShowTime.cpp CinemaC.cpp
+    g++ -o cinema_management_system *.cpp
     ```
 
 ### Running the Application
