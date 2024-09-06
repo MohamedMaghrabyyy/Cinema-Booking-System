@@ -40,11 +40,12 @@ void App::run() {
             cout << "1. View all movies\n"
                  << "2. View all showtimes\n"
                  << "3. Book a showtime\n"
-                 << "4. Logout\n"
+                 << "4. View Ticket History\n"                 
+                 << "5. Logout\n"
                  << "Choose an action: ";
             cin >> action;
             cin.ignore();
-
+            vector<Ticket> ticketHistory;
             switch (action) {
                 case 1:
                     cout << cinema->viewMovies() << endl;
@@ -56,6 +57,13 @@ void App::run() {
                     bookShowtime(user);
                     break;
                 case 4:
+                    ticketHistory = user.getTicketHistory();
+                    for(int i = 0; i < ticketHistory.size(); i++){
+                        cout << "Ticket " << i + 1 << ":" << endl;
+                        ticketHistory[i].printTicket();
+                    }
+                    break;
+                case 5:
                     cout << "Logging out..." << endl;
                     break;
                 default:

@@ -27,7 +27,7 @@ public:
     void setPaymentMethod(Payment* payment) { m_payment = payment; }
     Payment* getPaymentMethod() const { return m_payment; }
     void addTicket(const Ticket& ticket) { m_ticketsHistory.push_back(ticket); }
-    std::vector<Ticket> getTicketHistory() const { return m_ticketsHistory; }
+    std::vector<Ticket> getTicketHistory() const {return m_ticketsHistory; }
 };
 
 #endif
