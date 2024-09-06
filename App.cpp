@@ -114,8 +114,8 @@ void App::bookShowtime(UserC& user) {
     cout << "Available showtimes:" << endl;
     for (size_t i = 0; i < showtimes.size(); ++i) {
         cout << i + 1 << ". Movie: " << showtimes[i].getMovie().GetTitle()
-             << ", Day: " << static_cast<int>(showtimes[i].getDay())
-             << ", Time: " << static_cast<int>(showtimes[i].getTime())
+             << ", Day: " << m_dayStr.at(showtimes[i].getDay())
+             << ", Time: " << m_timeStr.at(showtimes[i].getTime())
              << ", Hall: " << showtimes[i].getHall().getName() << endl;
     }
 
@@ -161,6 +161,10 @@ void App::bookShowtime(UserC& user) {
     Payment* payment = nullptr;
     if (paymentMethod == "stored") {
         payment = const_cast<Payment*>(user.getPaymentMethod());
+        if(payment == nullptr){
+            cout << "Your Payment Method is not Stored. Please Try Again.\n";
+            return;
+        }
     } else if (paymentMethod == "new") {
         string methodType;
         cout << "Enter payment method type (credit/debit/paypal): ";
@@ -196,14 +200,26 @@ void App::createInitialData() {
     // Example data for halls
     cinema->AddHall(Hall("Hall 1", HallE::PREMIUM));
     cinema->AddHall(Hall("Hall 2", HallE::STANDARD));
+    cinema->AddHall(Hall("Hall 3", HallE::PREMIUM));
+    cinema->AddHall(Hall("Hall 4", HallE::STANDARD));
+    cinema->AddHall(Hall("Hall 5", HallE::IMAX));
+    cinema->AddHall(Hall("Hall 6", HallE::PREMIUM));
 
     // Example data for movies
-    cinema->AddMovie(MovieC("Movie", { MovieGenreE::ACTION, MovieGenreE::COMEDY }, 8.5));
+    cinema->AddMovie(MovieC("Movie A", { MovieGenreE::ACTION, MovieGenreE::COMEDY }, 8.5));
     cinema->AddMovie(MovieC("Movie B", { MovieGenreE::DRAMA, MovieGenreE::THRILLER }, 7.2));
     cinema->AddMovie(MovieC("Movie C", { MovieGenreE::HORROR, MovieGenreE::ROMANCE }, 9.1));
+    cinema->AddMovie(MovieC("Movie D", { MovieGenreE::DRAMA }, 9.3));
+    cinema->AddMovie(MovieC("Movie E", { MovieGenreE::THRILLER }, 8.4));
+    cinema->AddMovie(MovieC("Movie F", { MovieGenreE::HORROR }, 5.2));
+    cinema->AddMovie(MovieC("Movie G", { MovieGenreE::SCIENCE_FICTION }, 7.3));
 
     // Example data for showtimes
     cinema->AddShowTime(ShowTime(cinema->getMovies()[0], DayE::MONDAY, TimeE::SIX_PM, cinema->getHalls()[0]));
     cinema->AddShowTime(ShowTime(cinema->getMovies()[1], DayE::TUESDAY, TimeE::TWELVE_AM, cinema->getHalls()[1]));
     cinema->AddShowTime(ShowTime(cinema->getMovies()[2], DayE::WEDNESDAY, TimeE::NINE_AM, cinema->getHalls()[0]));
+    cinema->AddShowTime(ShowTime(cinema->getMovies()[2], DayE::SATURDAY, TimeE::TWELVE_AM, cinema->getHalls()[0]));
+    cinema->AddShowTime(ShowTime(cinema->getMovies()[3], DayE::FRIDAY, TimeE::THREE_PM, cinema->getHalls()[3]));
+    cinema->AddShowTime(ShowTime(cinema->getMovies()[4], DayE::THURSDAY, TimeE::NINE_PM, cinema->getHalls()[4]));
+    cinema->AddShowTime(ShowTime(cinema->getMovies()[5], DayE::WEDNESDAY, TimeE::TWELVE_PM, cinema->getHalls()[5]));
 }

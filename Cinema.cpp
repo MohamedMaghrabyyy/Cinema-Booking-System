@@ -69,8 +69,8 @@ std::string CinemaC::viewAllShowtimes() const {
     std::string result;
     for (const auto& showtime : m_showtimes) {
         result += "" + showtime.getMovie().GetTitle()
-                + ", " + std::to_string(static_cast<int>(showtime.getDay()))
-                + ", " + std::to_string(static_cast<int>(showtime.getTime()))
+                + ", " + m_dayStr.at(showtime.getDay())
+                + ", " + m_timeStr.at(showtime.getTime())
                 + ", " + showtime.getHall().getName() + "\n";
     }
     return result;
